@@ -1,0 +1,175 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <title>Animal Quiz Scramble</title>
+
+    <!-- Google Fonts -->
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700&family=Josefin+Sans:wght@400;700&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="style.css" class="src" />
+  </head>
+  <body>
+    <!-- Screen 1 – Welcome -->
+    <section
+      id="welcome-screen"
+      class="screen screen--active app-card app-card--welcome"
+    >
+      <div class="welcome-left">
+        <h1 class="welcome-title">Welcome to animal quiz</h1>
+        <p class="welcome-subtitle">
+          Click any animal card to start a fun game. Each game will show you
+          three pictures, and you have to pick the correct animal. If you get it
+          right, you move to the next question. If not, you can try again!
+        </p>
+        <!-- Yellow CTA button -->
+        <button id="start-btn" class="btn btn--yellow" type="button">
+          Start
+        </button>
+      </div>
+
+      <div class="welcome-right">
+        <div class="stack-card stack-card--octopus"></div>
+        <div class="stack-card stack-card--bird"></div>
+        <div class="stack-card stack-card--cat"></div>
+      </div>
+    </section>
+
+    <!-- Screen 2 – Category Selection -->
+    <section
+      id="category-screen"
+      class="screen app-card app-card--category"
+      aria-hidden="true"
+    >
+      <div class="category-content">
+        <h2 class="category-title">
+          Choose an <br />
+          animal to begin!
+        </h2>
+
+        <div class="category-bar">
+          <div class="category-bar-wrap">
+            <!-- CAT -->
+            <article
+              class="category-card category-card--cat"
+              data-category="cat"
+            >
+              <div class="category-card__image">
+                <img src="images/abbysinian.jpg" alt="Cat" />
+              </div>
+              <div class="category-card__title">Cat</div>
+              <div class="category-card__subtitle">Quiz</div>
+            </article>
+
+            <!-- DOG -->
+            <article
+              class="category-card category-card--dog"
+              data-category="dog"
+            >
+              <div class="category-card__image">
+                <img src="images/bulldog.jpg" alt="Dog" />
+              </div>
+              <div class="category-card__title">Dog</div>
+              <div class="category-card__subtitle">Quiz</div>
+            </article>
+
+            <!-- FISH -->
+            <article
+              class="category-card category-card--fish"
+              data-category="fish"
+            >
+              <div class="category-card__image">
+                <img src="images/anglefish.jpg" alt="Fish" />
+              </div>
+              <div class="category-card__title">Fish</div>
+              <div class="category-card__subtitle">Quiz</div>
+            </article>
+
+            <!-- BIRD -->
+            <article
+              class="category-card category-card--bird"
+              data-category="bird"
+            >
+              <div class="category-card__image">
+                <img src="images/flamingo.jpg" alt="Bird" />
+              </div>
+              <div class="category-card__title">Bird</div>
+              <div class="category-card__subtitle">Quiz</div>
+            </article>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Screen 3 – Game Screen -->
+    <section
+      id="game-screen"
+      class="screen app-card app-card--game"
+      aria-hidden="true"
+    >
+      <div class="game-content">
+        <div>
+          <p class="question-progress" id="question-progress"></p>
+          <h2 class="question-text" id="question-text"></h2>
+        </div>
+
+        <div class="options-card">
+          <div class="hint-box" id="hint-box"></div>
+
+          <div class="options-grid" id="options-grid">
+            <!-- 3 option buttons -->
+            <button class="option-card" data-index="0" type="button">
+              <img src="" alt="" />
+            </button>
+            <button class="option-card" data-index="1" type="button">
+              <img src="" alt="" />
+            </button>
+            <button class="option-card" data-index="2" type="button">
+              <img src="" alt="" />
+            </button>
+          </div>
+        </div>
+
+        <div class="nav-buttons">
+          <button id="back-btn" class="btn btn--secondary" type="button">
+            Back
+          </button>
+          <button id="next-btn" class="btn btn--yellow" type="button">
+            Next
+          </button>
+        </div>
+
+        <p id="validation-message" class="validation-message"></p>
+      </div>
+    </section>
+
+    <!-- Screen 4 – Result Screen -->
+    <section
+      id="result-screen"
+      class="screen app-card app-card--result"
+      aria-hidden="true"
+    >
+      <div class="result-wrapper">
+        <div class="result-outer">
+          <div class="result-inner-wrapper">
+            <div class="result-inner">
+              <p id="result-text" class="result-text"></p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="result-buttons">
+        <button id="play-again-btn" class="btn btn--secondary" type="button">
+          Play Again
+        </button>
+        <button id="done-btn" class="btn btn--yellow" type="button">
+          Done
+        </button>
+      </div>
+    </section>
+    <script src="script.js"></script>
+  </body>
+</html>

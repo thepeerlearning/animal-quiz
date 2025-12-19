@@ -1,0 +1,621 @@
+/* ------------------------------
+         Global / Layout
+      ------------------------------ */
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  min-height: 100vh;
+  background: #1a212c;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 24px;
+  font-family: "Inter", system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI",
+    sans-serif;
+}
+
+/* Main glass card reused across screens */
+/* Main glass overlay card used on all screens */
+.app-card {
+  width: 100%;
+  max-width: 1200px;
+  height: 700px;
+  border-radius: 50px;
+  border: 1px solid #242b34;
+  box-shadow: 0px 20px 110px 0px #00000026;
+  background-color: #0d131a80;
+  background-size: cover;
+  background-position: center;
+  overflow: hidden;
+
+  padding: 60px 80px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  position: relative;
+}
+
+.app-card--welcome {
+  background-image: url("images/beagie.jpg");
+  position: relative;
+}
+
+.app-card--welcome::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: #0d131a80;
+  z-index: 1;
+  pointer-events: none;
+}
+.app-card--welcome > * {
+  position: relative;
+  z-index: 2;
+}
+.app-card--category {
+  background-image: url("images/orange-tabby.jpg");
+  position: relative;
+}
+.app-card--category::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: #0d131a80;
+  z-index: 1;
+  pointer-events: none;
+}
+.app-card--category > * {
+  position: relative;
+  z-index: 2;
+}
+.app-card--game,
+.app-card--result {
+  background-image: url("images/whale.jpg");
+  box-shadow: 0px 20px 110px 0px #00000026;
+  border: 1px solid #242b34;
+}
+.app-card--game::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: #0d131a80;
+  z-index: 1;
+  pointer-events: none;
+}
+.app-card--game > * {
+  position: relative;
+  z-index: 2;
+}
+
+.app-card--result::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: #0d131a80;
+  z-index: 1;
+  pointer-events: none;
+}
+.app-card--result > * {
+  position: relative;
+  z-index: 2;
+}
+/* Buttons */
+.btn {
+  border-radius: 45px;
+  border: 1px solid #191a23;
+  height: 64px;
+  min-width: 180px;
+  font-family: "Inter", sans-serif;
+  font-weight: 500;
+  font-size: 30px;
+  cursor: pointer;
+  box-shadow: 0px 5px 0px 0px #191a23;
+  transition: transform 0.12s ease, box-shadow 0.12s ease, opacity 0.12s;
+}
+
+.btn--dark {
+  background: #1a212c;
+  color: #ffffff;
+}
+
+.btn--secondary {
+  background: #1f3945;
+  color: #d5dbdb;
+}
+
+.btn--yellow {
+  background: #ffe015;
+  color: #1a212c;
+}
+
+.btn:hover {
+  transform: translateY(2px);
+  box-shadow: 0px 3px 0px 0px #191a23;
+}
+
+.btn:active {
+  transform: translateY(4px);
+  box-shadow: 0px 1px 0px 0px #191a23;
+}
+
+.btn:disabled {
+  opacity: 0.5;
+  cursor: default;
+  transform: none;
+  box-shadow: 0px 5px 0px 0px #191a23;
+}
+
+/* ------------------------------------
+         Screen 1 – Welcome
+      ------------------------------------ */
+.welcome-left {
+  max-width: 380px;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.welcome-title {
+  font-family: "Josefin Sans", sans-serif;
+  font-weight: 700;
+  font-size: 50px;
+  line-height: 56px;
+  text-transform: uppercase;
+  color: #ffffff;
+}
+
+.welcome-subtitle {
+  font-family: "Josefin Sans", sans-serif;
+  font-weight: 400;
+  font-size: 22px;
+  line-height: 27px;
+  color: #ffffff80;
+}
+
+/* Right side "carousel" stack */
+.welcome-right {
+  position: relative;
+  width: 620px;
+  height: 360px;
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+}
+
+.stack-card {
+  position: absolute;
+  background-size: cover;
+  background-position: center;
+  border-radius: 20px;
+  overflow: hidden;
+}
+
+/* FRONT card – octopus */
+.stack-card--octopus {
+  width: 443px;
+  height: 296px;
+  border-radius: 35px;
+  border: 1px solid #242b34;
+  box-shadow: 0px 0px 220px 60px #000000;
+  background-image: url("images/octopus.jpg");
+  background-position: center;
+  background-size: cover;
+  left: 100px;
+  top: 66px;
+  z-index: 100;
+}
+
+/* MIDDLE card – bird */
+.stack-card--bird {
+  width: 360px;
+  height: 240px;
+  border-radius: 20px;
+  border: 1px solid #f4562633;
+  background: #d9d9d9;
+  box-shadow: 0px 0px 80px 0px #000000;
+  background-image: url("images/albatross.jpg");
+  background-position: calc(100% + 50px) 50%;
+  background-size: cover;
+  left: 290px;
+  top: 100px;
+  z-index: 50;
+}
+
+/* BACK card – small cat */
+.stack-card--cat {
+  width: 272px;
+  height: 182px;
+  border-radius: 20px;
+  border: 1px solid #daa8534d;
+  background: linear-gradient(0deg, #d9d9d9, #d9d9d9),
+    linear-gradient(0deg, rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5));
+  box-shadow: 0px 10px 80px 0px #000000;
+  background-image: url("images/birdman.jpg");
+  background-position: right;
+  background-size: contain;
+  left: 490px;
+  top: 120px;
+  z-index: 40;
+}
+
+/* ------------------------------------
+         Screen 2 – Category Selection
+      ------------------------------------ */
+.category-content {
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  gap: 40px;
+  width: 100%;
+}
+.category-title {
+  max-width: 420px;
+  font-family: "Inter", sans-serif;
+  font-weight: 700;
+  font-size: 40px;
+  text-transform: uppercase;
+  color: #ffffff;
+}
+
+.category-bar {
+  width: 697px;
+  height: 182px;
+  border-radius: 50px;
+  background: #1e2d3acc;
+  border: 1px solid #2c3944;
+  backdrop-filter: blur(9px);
+  padding: 0 60px;
+  margin: 0 auto;
+  align-self: center;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  overflow: visible;
+}
+.category-bar-wrap {
+  width: 578px;
+  height: 210.8000030517578px;
+  opacity: 1;
+  display: flex;
+  gap: 38px;
+  align-items: center;
+  justify-content: center;
+  transform: translateY(-28px);
+}
+
+.category-card {
+  width: 116px;
+  height: 210.8px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 16px;
+  cursor: pointer;
+
+  transition: transform 0.15s ease, box-shadow 0.15s ease;
+}
+
+.category-card:hover {
+  transform: translateY(-4px);
+}
+
+.category-card__image {
+  width: 116px;
+  height: 151px;
+  border-radius: 28.12px;
+  border: 1.16px solid #ffffff66;
+  box-shadow: 0px 23.2px 69.6px 0px #26fcff4d;
+  overflow: hidden;
+}
+
+.category-card__image img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+  overflow: hidden;
+  box-shadow: 0px 14.8px 22.2px 0px #0000000d;
+}
+
+.category-card__title {
+  font-family: "Josefin Sans", sans-serif;
+  font-weight: 700;
+  font-size: 22px;
+  text-align: center;
+}
+
+.category-card__subtitle {
+  font-family: "Josefin Sans", sans-serif;
+  font-weight: 400;
+  font-size: 14px;
+  text-align: center;
+}
+
+.category-card--cat .category-card__title,
+.category-card--cat .category-card__subtitle {
+  color: #f3f3f3;
+}
+
+.category-card--dog .category-card__title,
+.category-card--dog .category-card__subtitle {
+  color: #fec6c7;
+}
+
+.category-card--fish .category-card__title,
+.category-card--fish .category-card__subtitle {
+  color: #d9b8d5;
+}
+
+.category-card--bird .category-card__title,
+.category-card--bird .category-card__subtitle {
+  color: #80c0fe;
+}
+
+/* ------------------------------------
+         Screen 3 – Game Screen
+      ------------------------------------ */
+.game-content {
+  height: 100%;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  gap: 32px;
+}
+.question-text {
+  max-width: 700px;
+  font-family: "Inter", sans-serif;
+  font-weight: 400;
+  font-size: 40px;
+  text-transform: uppercase;
+  color: #ffffff;
+}
+
+.question-progress {
+  font-family: "Inter", sans-serif;
+  font-size: 16px;
+  color: #ffffffa6;
+}
+
+.options-card {
+  width: 100%;
+  max-width: 1080px;
+  min-height: 305px;
+  margin: 0 auto;
+  border-radius: 50px;
+  background: #1e2d3acc;
+  border: 1px solid #2c3944;
+  backdrop-filter: blur(9px);
+  padding: 0 60px;
+  display: flex;
+  gap: 24px;
+
+  justify-content: center;
+  align-items: center;
+}
+
+.hint-box {
+  width: 267px;
+  font-family: "Josefin Sans", sans-serif;
+  font-weight: 400;
+  font-size: 18px;
+  line-height: 20px;
+  color: #ffffff80;
+}
+
+.hint-box span {
+  color: #ffe015;
+}
+
+.options-grid {
+  flex: 1;
+  display: flex;
+  justify-content: space-between;
+  gap: 16px;
+}
+
+.option-card {
+  width: 221px;
+  height: 281px;
+  border-radius: 28.1px;
+  border: 2.32px solid #e9eef280;
+  box-shadow: 0px 14.8px 22.2px 0px #0000000d;
+  overflow: hidden;
+  padding: 0;
+  background: transparent;
+  cursor: pointer;
+  transition: transform 0.12s ease, box-shadow 0.12s ease,
+    border-color 0.12s ease;
+  position: relative;
+}
+.option-card ::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: #0d131a80;
+  z-index: 1;
+  pointer-events: none;
+}
+.option-card > * {
+  position: relative;
+  z-index: 2;
+}
+.option-card img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+
+.option-card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0px 18px 24px 0px #00000033;
+}
+
+.option-card.selected {
+  border-color: #ffe015;
+  box-shadow: 0 0 0 3px rgba(255, 224, 21, 0.6);
+  transform: translateY(-4px);
+}
+
+.nav-buttons {
+  width: 455px;
+  margin: 0 auto;
+  display: flex;
+  justify-content: center;
+  gap: 9px;
+}
+
+.validation-message {
+  margin-top: 8px;
+  text-align: center;
+  font-size: 16px;
+  color: #ffe015;
+  min-height: 20px;
+}
+
+/* ------------------------------------
+         Screen 4 – Result Screen
+      ------------------------------------ */
+.result-wrapper {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.result-outer {
+  width: 526px;
+  height: 391px;
+  border-radius: 50px;
+  border: 1px solid #2c3944;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: #1e2d3acc;
+  border: 1px solid #2c3944;
+  backdrop-filter: blur(9px);
+}
+
+.result-inner {
+  width: 433.5px;
+  height: 281.35px;
+  border-radius: 18px;
+  background: #1f2d3a;
+  border: 1.16px solid #ffffff66;
+  box-shadow: 0px 23.2px 69.6px 0px #26fcff4d;
+
+  /* box-shadow: 0px 14.8px 22.2px 0px #0000000d; */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 40px;
+}
+
+.result-text {
+  font-family: "Josefin Sans", sans-serif;
+  font-weight: 400;
+  font-size: 25px;
+  line-height: 28px;
+  text-align: center;
+  color: #00e676;
+}
+
+.result-buttons {
+  position: absolute;
+  bottom: 60px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 455px;
+  display: flex;
+  justify-content: center;
+  gap: 9px;
+}
+
+/* ------------------------------------
+         Responsive tweaks
+      ------------------------------------ */
+@media (max-width: 1024px) {
+  .app-card {
+    height: 100vh;
+    padding: 40px 32px;
+    flex-direction: column;
+    gap: 40px;
+  }
+
+  .welcome-right {
+    width: 100%;
+    max-width: 480px;
+  }
+
+  .category-bar {
+    width: 100%;
+    max-width: 697px;
+    padding: 0 24px;
+  }
+
+  .options-card {
+    flex-direction: column;
+    align-items: flex-start;
+    padding: 24px 24px 32px;
+  }
+
+  .options-grid {
+    width: 100%;
+    justify-content: space-between;
+  }
+
+  .option-card {
+    flex: 1;
+  }
+
+  .nav-buttons,
+  .result-buttons {
+    width: 100%;
+    max-width: 455px;
+  }
+}
+
+@media (max-width: 768px) {
+  .app-card {
+    height: 80vh;
+  }
+  .options-grid {
+    flex-wrap: wrap;
+    justify-content: center;
+  }
+
+  .option-card {
+    width: 45%;
+    max-width: 220px;
+    height: 220px;
+  }
+
+  .category-bar {
+    flex-wrap: wrap;
+    height: auto;
+    padding: 16px 24px;
+    gap: 16px;
+    justify-content: center;
+  }
+}
+
+/* -------------------------------------------------
+         SHOW / HIDE SCREENS – must come after .app-card
+      ---------------------------------------------------*/
+
+/* Hide all screens by default */
+.screen {
+  display: none !important;
+}
+
+/* Only the active screen is shown */
+.screen.screen--active {
+  display: flex !important;
+}
